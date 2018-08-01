@@ -56,6 +56,51 @@ declare namespace qq {
 
       clone(): Point;
     }
+
+    class Size {
+      private width: number;
+      private height: number;
+
+      constructor(width: number, height: number);
+
+      equals(other: Size): boolean;
+
+      getWidth(): number;
+
+      getHeight(): number;
+
+      toString(): string;
+
+      clone(): Size;
+    }
+
+
+    class LatLng {
+      constructor(lat: number, lng: number);
+
+      equals(other: LatLng): boolean;
+
+      getLat(): number;
+
+      getLng(): number;
+
+      toString(): string;
+
+      clone(): LatLng;
+    }
+
+    class LatLngBounds {
+      constructor(sw?: LatLng, ne?: LatLng);
+
+      getCenter(): LatLng;
+      getNorthEast():	LatLng;
+      getSouthWest(): LatLng;
+      extend(latlng: LatLng): LatLngBounds;
+      union(): LatLngBounds;
+      isEmpty(): boolean;
+      contains(latlng: LatLng): boolean;
+      toString(): string;
+    }
   }
 }
 

@@ -145,6 +145,103 @@ declare namespace qq {
       trigger(instance: Object, eventName: String, args?: any): void;
 
     }
+
+    /* Core Classes */
+    enum MapZoomType {
+      DEFAULT,
+      CENTER
+    }
+
+    enum MapTypeId {
+      ROADMAP,
+      SATELLITE,
+      HYBRID
+    }
+
+    enum ControlPosition {
+      TOP_LEFT,
+      TOP_CENTER,
+      TOP_RIGHT,
+      BOTTOM_LEFT,
+      BOTTOM_CENTER,
+      BOTTOM_RIGHT,
+      LEFT_TOP,
+      LEFT_CENTER,
+      LEFT_BOTTOM,
+      RIGHT_TOP,
+      RIGHT_CENTER,
+      RIGHT_BOTTOM,
+      CENTER
+    }
+
+    enum ZoomControlStyle {
+      DEFAULT,
+      LARGE,
+      SMALL
+    }
+
+    interface MapTypeControlOptions {
+      mapTypeIds: Array<MapTypeId> | Array<string>;
+      position: ControlPosition;
+    }
+
+    interface PanControlOptions {
+      position: ControlPosition;
+    }
+
+    interface ZoomControlOptions {
+      position: ControlPosition;
+      style: ZoomControlStyle;
+    }
+
+    interface ScaleControlOptions {
+      position: ControlPosition;
+    }
+
+    interface MapOptions {
+      center: LatLng;
+      zoom: number;
+      minZoom: number;
+      maxZoom: number;
+      mapZoomType: MapZoomType;
+      noClear: boolean;
+      backgroundColor: string;
+      boundary: LatLngBounds;
+      draggableCursor: string;
+      draggingCursor: string;
+      mapTypeId: MapTypeId;
+      draggable: boolean;
+      scrollwheel: boolean;
+      disableDoubleClickZoom: boolean;
+      keyboardShortcuts: boolean;
+      mapTypeControl: boolean;
+      mapTypeControlOptions: MapTypeControlOptions;
+      panControl: boolean;
+      panControlOptions: PanControlOptions;
+      zoomControl: boolean;
+      zoomControlOptions: ZoomControlOptions;
+      scaleControl: boolean;
+      scaleControlOptions: ScaleControlOptions;
+    }
+
+
+    class Map extends MVCObject {
+      constructor(mapContainer: HTMLDivElement | string, options?: MapOptions);
+
+      fitBounds(bounds: LatLngBounds, padding?: number): void;
+
+      getBounds(): LatLngBounds;
+
+      getCenter(): LatLng;
+
+      getZoom(): number;
+
+      getContainer(): HTMLDivElement;
+
+      getMapTypeId(): MapTypeId;
+
+      // TODO: getPosition
+    }
   }
 }
 

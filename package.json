@@ -1,0 +1,12 @@
+{
+  "name": "lbs-tencent-typings",
+  "version": "0.1.0",
+  "description": "lbs.qq.com javascript api v2 typings",
+  "main": "index.js",
+  "repository": "https://github.com/aquariuslt/lbs-tencent-typings",
+  "author": "Aquariuslt<superaquariuslt@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.5.5"
+  }
+}

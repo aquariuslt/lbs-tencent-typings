@@ -93,13 +93,32 @@ declare namespace qq {
       constructor(sw?: LatLng, ne?: LatLng);
 
       getCenter(): LatLng;
-      getNorthEast():	LatLng;
+
+      getNorthEast(): LatLng;
+
       getSouthWest(): LatLng;
+
       extend(latlng: LatLng): LatLngBounds;
+
       union(): LatLngBounds;
+
       isEmpty(): boolean;
+
       contains(latlng: LatLng): boolean;
+
       toString(): string;
+    }
+
+    class Color {
+      constructor(red: number, green: number, blue: number, alpha?: number);
+
+      toRGB(): string;
+
+      toRGBA(): string;
+
+      toHex(): string;
+
+      static fromHex(): Color;
     }
   }
 }

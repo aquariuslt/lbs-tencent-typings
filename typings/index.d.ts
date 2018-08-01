@@ -120,6 +120,31 @@ declare namespace qq {
 
       static fromHex(): Color;
     }
+
+    interface MapsEventListener {
+    }
+
+    interface MouseEvent {
+      latLng: LatLng;
+      pixel: Point;
+    }
+
+    class Event {
+      addDomListener(element: HTMLElement, eventName: string, handler: Function): MapsEventListener;
+
+      addDomListenerOnce(element: HTMLElement, eventName: string, handler: Function): MapsEventListener;
+
+      addListener(instance: object, eventName: string, handler: Function): MapsEventListener;
+
+      addListenerOnce(instance: object, eventName: string, handler: Function): MapsEventListener;
+
+      removeListener(listener: MapsEventListener): void;
+
+      clearListeners(instance: Object, eventName: String): void;
+
+      trigger(instance: Object, eventName: String, args?: any): void;
+
+    }
   }
 }
 

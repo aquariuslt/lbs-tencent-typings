@@ -264,6 +264,109 @@ declare namespace qq {
     }
 
 
+    /* Marker */
+    enum MarkerAnimation {
+      BOUNCE,
+      DROP,
+      DOWN,
+      UP
+    }
+
+    interface MarkerOptions {
+      animation: MarkerAnimation;
+      clickable: boolean;
+      draggable: boolean;
+      flat: boolean;
+      cursor: string;
+      icon: MarkerImage;
+      shadow: MarkerImage;
+      shape: MarkerImage;
+      title: string;
+      visible: boolean;
+      zIndex: boolean;
+      map: Map;
+      position: LatLng;
+      rotation: number;
+      autoRotation: boolean;
+    }
+
+    class MarkerImage {
+      constructor(url: string, size: Size, origin: Point, anchor: Point, scaleSize: Size, shadowAngle?: number);
+    }
+
+    class MarkerShape {
+      constructor(coords: Array<number>, type: 'circle' | 'poly' | 'rect')
+    }
+
+    class Marker {
+      constructor(options: MarkerOptions);
+
+      getAnimation(): MarkerAnimation;
+
+      getClickable(): boolean;
+
+      getCursor(): string;
+
+      getDraggable(): boolean;
+
+      getFlat(): boolean;
+
+      getIcon(): string | MarkerImage;
+
+      getMap(): Map;
+
+      getPosition(): LatLng;
+
+      getShadow(): string | MarkerImage;
+
+      getShape(): MarkerShape;
+
+      getTitle(): string;
+
+      getVisible(): boolean;
+
+      getRotation(): number;
+
+      setAnimation(animation: MarkerAnimation): void;
+
+      setClickable(clickable: boolean): void;
+
+      setCursor(cursor: string): void;
+
+      setDraggable(draggable: boolean): void;
+
+      setFlat(flat: boolean): void;
+
+      setIcon(icon: string | MarkerImage): void;
+
+      setMap(map: Map): void;
+
+      setPosition(position: LatLng): void;
+
+      setShadow(shadow: string | MarkerImage): void;
+
+      setShape(shape: MarkerShape): void;
+
+      setTitle(title: string): void;
+
+      setVisible(visible: boolean): void;
+
+      setZIndex(zIndex: number): void;
+
+      setRotation(rotation: number): void;
+
+      moveTo(latLng: LatLng, speed: number): void;
+
+      moveAlong(path: Array<LatLng>, speed: number): void;
+
+      stopMove(): void;
+
+      pauseMove(): void;
+
+      resumeMove(): void;
+    }
+
+
     /* Services */
     enum ServiceResultType {
       POI_LIST,
@@ -277,6 +380,13 @@ declare namespace qq {
       MULTI_DESTINATION
     }
 
+    enum ServiceErrorType {
+      Error,
+      NO_RESULTS,
+      INVALID_REQUEST,
+      UNKNOWN_ERROR
+    }
+
     enum PoiType {
       NORMAL,
       BUS_STATION,
@@ -286,14 +396,14 @@ declare namespace qq {
     }
 
     interface SearchServiceOptions {
-      complete: Function;
-      error: Function;
-      pageIndex: number;
-      pageCapacity: number;
-      location: string;
-      map: Map;
-      panel: string | HTMLDivElement;
-      autoExtend: boolean;
+      complete?: Function;
+      error?: Function;
+      pageIndex?: number;
+      pageCapacity?: number;
+      location?: string;
+      map?: Map;
+      panel?: string | HTMLDivElement;
+      autoExtend?: boolean;
     }
 
     interface PoiList {
@@ -334,8 +444,8 @@ declare namespace qq {
       latlng: LatLng;
     }
 
-
     type SearchServiceCompleteFunction = (type: ServiceResultType, detail: PoiList | CityList | AreaInfo) => void;
+    type SearchServiceErrorFunction = (error: ServiceErrorType) => void;
 
 
     class SearchService {
@@ -349,7 +459,7 @@ declare namespace qq {
 
       setComplete(callback: SearchServiceCompleteFunction): void;
 
-      setError(callback: Function): void;
+      setError(callback: SearchServiceErrorFunction): void;
 
       setLocation(location: string): LatLng;
 

@@ -458,6 +458,134 @@ declare namespace qq {
       setOptions(options: PolylineOptions): void;
     }
 
+    interface PolygonOptions {
+      clickable: boolean;
+      cursor: string;
+      editable: boolean;
+      fillColor: Color | string;
+      map: Map;
+      path: Array<LatLng> | MVCArray<LatLng>;
+      strokeColor: Color | string;
+      strokeDashStyle: string;
+      strokeWeight: number;
+      visible: boolean;
+      zIndex: number;
+    }
+
+    class Polygon extends MVCObject {
+      constructor(options: PolygonOptions);
+
+      getBounds(): LatLngBounds;
+
+      getMap(): Map;
+
+      getPath(): MVCArray<LatLng>;
+
+      getStrokeColor(): Color;
+
+      getStrokeWeight(): number;
+
+      getVisible(): boolean;
+
+      getZIndex(): number;
+
+      setMap(map: Map): void;
+
+      setPath(path: Array<LatLng> | MVCArray<LatLng>): void;
+
+      setStrokeColor(color: Color): void;
+
+      setStrokeWeight(width: Number): void;
+
+      setVisible(visible: boolean): void;
+
+      setZIndex(zIndex: number): void;
+
+      setOptions(options: PolygonOptions): void;
+    }
+
+    interface CircleOptions {
+      center: LatLng;
+      clickable: boolean;
+      cursor: string;
+      editable: boolean;
+      fillColor: Color | string;
+      map: Map;
+      path: Array<LatLng> | MVCArray<LatLng>;
+      strokeColor: Color | string;
+      strokeDashStyle: string;
+      strokeWeight: number;
+      visible: boolean;
+      zIndex: number;
+    }
+
+    class Circle extends MVCObject {
+      constructor(options: CircleOptions);
+
+      getBounds(): LatLngBounds;
+
+      getCenter(): LatLng;
+
+      getMap(): Map;
+
+      getRadius(): number;
+
+      getVisible(): boolean;
+
+      getZIndex(): number;
+
+      setCenter(center: LatLng);
+
+      setMap(map: Map): void;
+
+      setRadius(radius: number): void;
+
+      setVisible(visible: boolean): void;
+
+      setZIndex(zIndex: number): void;
+
+      setOptions(options: CircleOptions): void;
+    }
+
+    interface LabelOptions {
+      clickable: boolean;
+      content: string;
+      map: Map;
+      offset: Size;
+      position: LatLng;
+      style: object;
+      visible: boolean;
+      zIndex: number;
+    }
+
+    class Label extends MVCObject {
+      constructor(options: LabelOptions);
+
+      getContent(): string;
+
+      getMap(): Map;
+
+      getPosition(): LatLng;
+
+      getVisible(): boolean;
+
+      getZIndex(): number;
+
+      setContent(content: string): void;
+
+      setMap(map: Map): void;
+
+      setPosition(position: LatLng): void;
+
+      setStyle(style: object): void;
+
+      setVisible(visible: boolean): void;
+
+      setZIndex(zIndex: number): void;
+
+      setOptions(options: LabelOptions): void;
+    }
+
 
     /* Components */
     interface MapTypeControlOptions {

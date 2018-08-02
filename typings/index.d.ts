@@ -20,24 +20,24 @@ declare namespace qq {
 
     }
 
-    class MVCArray {
+    class MVCArray<T> {
       constructor(array?: Array<any>);
 
       forEach(callback: Function): void;
 
-      getAt(index: number): any;
+      getAt(index: number): T;
 
-      setAt(index: number, element: any): void;
+      setAt(index: number, element: T): void;
+
+      setAt(element: T): number;
 
       getLength(): number;
 
-      pop(): any;
+      pop(): T;
 
-      setAt(element: any): number;
+      insertAt(index: number, element: T): void;
 
-      insertAt(index: number, element: any): void;
-
-      removeAt(index: number): any;
+      removeAt(index: number): T;
     }
 
     class Point {
@@ -224,9 +224,17 @@ declare namespace qq {
       scaleControlOptions: ScaleControlOptions;
     }
 
+    interface Projection {
+      fromLatLngToPoint(latLng: LatLng): Point;
+
+      fromPointToLatLng(pixel: Point, noWrap?: boolean);
+    }
 
     class Map extends MVCObject {
       constructor(mapContainer: HTMLDivElement | string, options?: MapOptions);
+
+      controls: Array<MVCArray<HTMLDivElement>>;
+
 
       fitBounds(bounds: LatLngBounds, padding?: number): void;
 
@@ -240,7 +248,122 @@ declare namespace qq {
 
       getMapTypeId(): MapTypeId;
 
-      // TODO: getPosition
+      getProjection(): Projection;
+
+      panBy(x: number, y: number): void;
+
+      zoomBy(deltaZoom: number): void;
+
+      setCenter(latLng: LatLng): void;
+
+      setZoom(zoom: number): void;
+
+      setMapTypeId(mapTypeId: MapTypeId): void;
+
+      setOptions(options: MapOptions);
+    }
+
+
+    /* Services */
+    enum ServiceResultType {
+      POI_LIST,
+      CITY_LIST,
+      AREA_INFO,
+      GEO_INFO,
+      STATION_INFO,
+      LINE_INFO,
+      TRANSFER_INFO,
+      DRIVING_INFO,
+      MULTI_DESTINATION
+    }
+
+    enum PoiType {
+      NORMAL,
+      BUS_STATION,
+      SUBWAY_STATION,
+      BUS_LINE,
+      DISTRICT
+    }
+
+    interface SearchServiceOptions {
+      complete: Function;
+      error: Function;
+      pageIndex: number;
+      pageCapacity: number;
+      location: string;
+      map: Map;
+      panel: string | HTMLDivElement;
+      autoExtend: boolean;
+    }
+
+    interface PoiList {
+      pois: Array<Poi>;
+      pageIndex: number;
+      pageCapacity: number;
+      totalNum: number;
+    }
+
+
+    interface Poi {
+      id: string;
+      name: string;
+      latLng: LatLng;
+      type: PoiType;
+      address: string;
+      phone: string;
+      postcode: string;
+      category: string;
+      boundary: Array<LatLng>;
+      panoinfo: object;
+      dist: number;
+    }
+
+    interface CityList {
+      cities: Array<City>;
+    }
+
+    interface City {
+      cityName: string;
+      resultNum: number;
+      cities?: Array<City>;
+    }
+
+    interface AreaInfo {
+      name: string;
+      level: string;
+      latlng: LatLng;
+    }
+
+
+    type SearchServiceCompleteFunction = (type: ServiceResultType, detail: PoiList | CityList | AreaInfo) => void;
+
+
+    class SearchService {
+      constructor(opts?: SearchServiceOptions);
+
+      search(keyword: string): void;
+
+      searchInBounds(keyword: string, latlngBounds: LatLngBounds): void;
+
+      searchNearBy(keyword: string, center: LatLng, radius: number): void;
+
+      setComplete(callback: SearchServiceCompleteFunction): void;
+
+      setError(callback: Function): void;
+
+      setLocation(location: string): LatLng;
+
+      setPageIndex(pageIndex: number): void;
+
+      setPageCapacity(pageCapacity: number): void;
+
+      getLocation(): LatLng;
+
+      getPageIndex(): number;
+
+      getPageCapacity(): number;
+
+      clear(): void;
     }
   }
 }

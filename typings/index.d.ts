@@ -366,6 +366,118 @@ declare namespace qq {
       resumeMove(): void;
     }
 
+    interface MarkerClusterOptions {
+      map: Map;
+      minimumClusterSize: number;
+      markers: Marker; // Suppose to be Array<Marker>
+      zoomOnClick: boolean;
+      gridSize: number;
+      averageCenter: boolean;
+      maxZoom: number
+    }
+
+    class MarkerCluster extends MVCObject {
+      constructor(options: MarkerClusterOptions);
+    }
+
+    interface InfoWindowOptions {
+      map: Map;
+      content: HTMLElement | string;
+      position: LatLng | Marker;
+      zIndex: number;
+    }
+
+    class InfoWindow extends MVCObject {
+      constructor(options: InfoWindowOptions);
+
+      open(): void;
+
+      close(): void;
+
+      getContent(): string | HTMLElement;
+
+      getMap(): Map;
+
+      getPosition(): LatLng | Marker;
+
+      getZIndex(): Number;
+
+      setContent(content: string | HTMLElement): void;
+
+      setMap(map: Map): void;
+
+      setPosition(position: LatLng | Marker): void;
+
+      setZIndex(zIndex: number);
+
+      setOptions(options: InfoWindowOptions): void;
+    }
+
+    interface PolylineOptions {
+      clickable: boolean;
+      cursor: string;
+      editable: boolean;
+      map: Map;
+      path: Array<LatLng> | MVCArray<LatLng>;
+      strokeColor: Color | string;
+      strokeDashStyle: string;
+      strokeWeight: number;
+      visible: boolean;
+      zIndex: number;
+    }
+
+    class Polyline extends MVCObject {
+      constructor(options: PolylineOptions);
+
+      getBounds(): LatLngBounds;
+
+      getMap(): Map;
+
+      getPath(): MVCArray<LatLng>;
+
+      getStrokeColor(): Color;
+
+      getStrokeWeight(): number;
+
+      getVisible(): boolean;
+
+      getZIndex(): number;
+
+      setMap(map: Map): void;
+
+      setPath(path: Array<LatLng> | MVCArray<LatLng>): void;
+
+      setStrokeColor(color: Color): void;
+
+      setStrokeWeight(width: Number): void;
+
+      setVisible(visible: boolean): void;
+
+      setZIndex(zIndex: number): void;
+
+      setOptions(options: PolylineOptions): void;
+    }
+
+
+    /* Components */
+    interface MapTypeControlOptions {
+      mapTypeIds: Array<MapTypeId> | Array<string>;
+      position: ControlPosition;
+    }
+
+    interface ScaleControlOptions {
+      position: ControlPosition;
+    }
+
+    interface ZoomControlOptions {
+      position: ControlPosition;
+      style: ZoomControlStyle;
+    }
+
+    interface PanControlOptions {
+      position: ControlPosition;
+    }
+
 
     /* Services */
     enum ServiceResultType {

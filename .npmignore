@@ -1,0 +1,18 @@
+# IDEA
+.idea
+*.iml
+
+# VSCode
+.vscode
+
+# Node
+node_modules
+package-lock.json
+yarn.lock
+
+
+# Npm Publish
+.github
+.editorconfig
+.coveralls.yml
+.travis.yml

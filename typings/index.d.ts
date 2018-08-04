@@ -682,6 +682,27 @@ declare namespace qq {
       DISTRICT
     }
 
+    enum TransferPolicy {
+      LEAST_TIME,
+      LEAST_TRANSFER,
+      LEAST_WALKING,
+      NO_SUBWAY
+    }
+
+    enum TransferActionType {
+      BUS,
+      SUBWAY,
+      WALK
+    }
+
+    enum DrivingPolicy {
+      LEAST_TIME,
+      LEAST_DISTANCE,
+      AVOID_HIGHWAYS,
+      REAL_TRAFFIC,
+      PREDICT_TRAFFIC
+    }
+
     interface SearchServiceOptions {
       complete?: Function;
       error?: Function;
@@ -731,6 +752,140 @@ declare namespace qq {
       latlng?: LatLng;
     }
 
+    interface AddressComponents {
+      streetnumber?: string;
+      street?: string;
+      district?: string;
+      city?: string;
+      province?: string;
+      country?: string;
+    }
+
+    interface GeoInfo {
+      address?: string;
+      addressComponents?: AddressComponents;
+      location?: LatLng;
+      nearPois?: Array<Poi>;
+      similarity?: number;
+      pcd_conflict_flag?: number;
+      gps_type?: number;
+    }
+
+    interface LineInfo {
+      id?: string;
+      name?: string;
+      from?: string;
+      to?: string;
+      price?: string;
+      stime?: string;
+      etime?: string;
+      distance?: string;
+      stationNum?: number;
+      path?: Array<LatLng>;
+      bounds?: LatLngBounds;
+      stations?: Array<Poi>;
+    }
+
+    interface StationInfo {
+      id?: string;
+      name?: string;
+      type?: PoiType;
+      latlng: LatLng;
+      lines?: Array<LineInfo>
+    }
+
+    interface TransferActionInfo {
+      type?: TransferActionType;
+      instructions?: string;
+      data?: LineInfo | RouteInfo;
+    }
+
+    interface TransferPlanInfo {
+      actions?: Array<TransferActionInfo>;
+      bounds?: LatLngBounds;
+      lines?: Array<LineInfo>;
+      stations?: Array<Poi>;
+      durations: string;
+      distance?: number;
+      walks?: RouteInfo;
+    }
+
+    interface TransferInfo {
+      plans?: Array<TransferPlanInfo>;
+      policy?: TransferPolicy;
+      city?: string;
+      start?: Poi;
+      end?: Poi;
+    }
+
+
+    interface RouteInfo {
+      duration?: string;
+      distance?: number;
+      path?: Array<LatLng>;
+      steps?: Array<StepInfo>;
+      start_address?: string;
+      start_location?: string;
+      end_address?: string;
+      end_location?: LatLng;
+    }
+
+    interface StepInfo {
+      duration?: string;
+      distance?: number;
+      roadname?: string;
+      start_location?: LatLng;
+      end_location?: LatLng;
+      instructions?: string;
+      path?: Array<LatLng>;
+      placemarks?: Array<Poi>;
+      cities?: Array<object>;
+      turning?: Turning;
+    }
+
+    interface Turning {
+      text: string;
+      latlng: LatLng;
+    }
+
+    interface DrivingInfo {
+      routes?: Array<RouteInfo>;
+      policy?: DrivingPolicy;
+      tmc?: boolean;
+      start?: Poi;
+      end?: Poi;
+      bounds?: LatLngBounds;
+      duration?: string;
+      distance: number;
+    }
+
+    interface MultiDestinitation {
+      start: Poi | Array<Poi> | CityList;
+      end: Poi | Array<Poi> | CityList;
+    }
+
+    interface ImageMapTypeOptions {
+      alt?: string;
+      getTileUrl?: (Point, number) => string;
+      minZoom?: number;
+      maxZoom?: number;
+      name?: string;
+      opacity?: string;
+      tileSize?: Size;
+    }
+
+    class ImageMapType {
+      constructor(options: ImageMapTypeOptions);
+
+      getOpacity(): number;
+
+      setOpacicy(opacity: number): void;
+    }
+
+
+    class MapTypeRegistry {
+      constructor();
+    }
 
     type SearchServiceCompleteFunction = (type: ServiceResultType, detail: PoiList | CityList | AreaInfo) => void;
     type SearchServiceErrorFunction = (error: ServiceErrorType) => void;
@@ -762,6 +917,129 @@ declare namespace qq {
       getPageCapacity(): number;
 
       clear(): void;
+    }
+
+    interface TransferServiceOptions {
+      policy?: TransferPolicy;
+      location?: string;
+      complete?: ({type: ServiceResultType, detail: TransferInfo}) => {};
+      error?: () => {};
+      map?: Map;
+      panel?: string | HTMLDivElement;
+    }
+
+    class TransferService {
+      constructor(options: TransferServiceOptions);
+
+      search(start: string | Poi | LatLng, end: string | Poi | LatLng)
+
+      void;
+
+      setPolicy(policy: TransferPolicy): void;
+
+      setLocation(location: string): void;
+
+      setComplete(callback: Function): void;
+
+      setError(callback: Function, errorDetail: object): void;
+
+      clear(): void;
+    }
+
+    interface LineServiceOptions {
+      complete?: ({type: ServiceResultType, detail: LineInfo}) => {};
+      error?: (ServiceErrorType) => {};
+    }
+
+    class LineService {
+      constructor(options?: LineServiceOptions);
+
+      searchById(lineId: string): void;
+
+      setComplete(callback: Function): void;
+
+      setError(callback: Function): void;
+    }
+
+    interface StationServiceOptions {
+      complete?: ({type: ServiceResultType, detail: StationInfo}) => {};
+      error?: (ServiceErrorType) => {};
+    }
+
+    class StationService {
+      constructor(options?: StationServiceOptions);
+
+      searchById(stationId: string): void;
+
+      setComplete(callback: Function): void;
+
+      setError(callback: Function): void;
+    }
+
+    interface DrivingServiceOptions {
+      policy?: DrivingPolicy;
+      location?: string;
+      time?: string;
+      complete?: ({type: ServiceResultType, detail: DrivingInfo}) => {};
+      error?: (ServiceErrorType);
+      map?: Map;
+      panel?: string | HTMLDivElement;
+    }
+
+    class DrivingService {
+      constructor(options?: DrivingServiceOptions);
+
+      search(start: string | LatLng, end: String | LatLng): void;
+
+      setPolicy(policy: DrivingPolicy, time: string): void;
+
+      setLocation(location: string): void;
+
+      setComplete(callback: Function): void;
+
+      setError(callback: Function): void;
+
+      clear(): void;
+    }
+
+    interface GeocoderOptions {
+      complete?: ({ type: ServiceResultType, detail: GeoInfo });
+      error?: (ServiceErrorType);
+    }
+
+    class Geocoder {
+      constructor(options?: GeocoderOptions);
+
+      getAddress(latlng): void;
+
+      getLocation(address: string): void;
+
+      setComplete(callback: Function): void;
+
+      setError(callback: Function): void;
+    }
+
+    interface CityServiceOptions {
+      complete?: ({type: ServiceResultType, detail: AreaInfo}) => {};
+      error?: (ServiceErrorType);
+    }
+
+    class CityService {
+      constructor(options: CityServiceOptions);
+
+      searchLocalCity(): LatLng;
+
+      searchCityByName(cityName: string): LatLng;
+
+      searchCityByLatLng(latlng: LatLng): LatLng;
+
+      searchCityByIP(ip: string): LatLng;
+
+      searchCityByAreaCode(areaCode: String): LatLng;
+
+      setComplete(callback: Function): void;
+
+      setError(callback: Function): void;
     }
   }
 }

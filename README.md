@@ -8,10 +8,12 @@
 
 ## Road Map
 
-- Provide Complete Type Definitions (80%)
+- Provide Complete Type Definitions (100%)
 - Provide Complete Type Definitions with Comments (0%)
 - Pure API Example 
 - UI Framework Component Example
+- Typing Tests
+
 
 ## Usage
 

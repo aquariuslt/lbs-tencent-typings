@@ -586,6 +586,53 @@ declare namespace qq {
       setOptions(options: LabelOptions): void;
     }
 
+    interface GroundOverlayOptions {
+      bounds: LatLngBounds;
+      clickable: boolean;
+      cursor: string;
+      imageUrl: string,
+      map: Map;
+      opacity: number;
+      visible: boolean;
+      zIndex: number;
+    }
+
+    class GroundOverlay {
+      constructor(options: GroundOverlayOptions);
+
+      getBounds(): LatLngBounds;
+
+      getImageurl(): string;
+
+      getMap(): Map;
+
+      getVisible(): boolean;
+
+      getZIndex(): boolean;
+
+      setBounds(bounds: LatLngBounds): void;
+
+      setImageUrl(imageUlr: string): void;
+
+      setMap(map: Map): void;
+
+      setVisible(visible: boolean): void;
+
+      setZIndex(zIndex: number);
+
+      setOptions(options: LabelOptions): void;
+    }
+
+    interface MapPanes {
+      mapPane: HTMLDivElement;
+      overlayLayer: HTMLDivElement;
+      overlayShadow: HTMLDivElement;
+      overlayImage: HTMLDivElement;
+      floatShadow: HTMLDivElement;
+      overlayMouseTarget: HTMLDivElement;
+      floatPane: HTMLDivElement;
+    }
+
 
     /* Components */
     interface MapTypeControlOptions {

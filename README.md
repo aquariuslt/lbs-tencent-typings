@@ -1,5 +1,8 @@
 # Tencent Location JavaScript API V2 Type Definitions 
 
+[![npm](https://img.shields.io/npm/v/lbs-tencent-typings.svg)](https://www.npmjs.com/package/lbs-tencent-typings)
+
+
 ## Background
 
 这是一份 [腾讯位置服务 - JavaScript API](http://lbs.qq.com/javascript_v2/doc/) V2 的Type Definitions 文件。

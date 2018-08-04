@@ -125,8 +125,8 @@ declare namespace qq {
     }
 
     interface MouseEvent {
-      latLng: LatLng;
-      pixel: Point;
+      latLng?: LatLng;
+      pixel?: Point;
     }
 
     class Event {
@@ -199,29 +199,29 @@ declare namespace qq {
     }
 
     interface MapOptions {
-      center: LatLng;
-      zoom: number;
-      minZoom: number;
-      maxZoom: number;
-      mapZoomType: MapZoomType;
-      noClear: boolean;
-      backgroundColor: string;
-      boundary: LatLngBounds;
-      draggableCursor: string;
-      draggingCursor: string;
-      mapTypeId: MapTypeId;
-      draggable: boolean;
-      scrollwheel: boolean;
-      disableDoubleClickZoom: boolean;
-      keyboardShortcuts: boolean;
-      mapTypeControl: boolean;
-      mapTypeControlOptions: MapTypeControlOptions;
-      panControl: boolean;
-      panControlOptions: PanControlOptions;
-      zoomControl: boolean;
-      zoomControlOptions: ZoomControlOptions;
-      scaleControl: boolean;
-      scaleControlOptions: ScaleControlOptions;
+      center?: LatLng;
+      zoom?: number;
+      minZoom?: number;
+      maxZoom?: number;
+      mapZoomType?: MapZoomType;
+      noClear?: boolean;
+      backgroundColor?: string;
+      boundary?: LatLngBounds;
+      draggableCursor?: string;
+      draggingCursor?: string;
+      mapTypeId?: MapTypeId;
+      draggable?: boolean;
+      scrollwheel?: boolean;
+      disableDoubleClickZoom?: boolean;
+      keyboardShortcuts?: boolean;
+      mapTypeControl?: boolean;
+      mapTypeControlOptions?: MapTypeControlOptions;
+      panControl?: boolean;
+      panControlOptions?: PanControlOptions;
+      zoomControl?: boolean;
+      zoomControlOptions?: ZoomControlOptions;
+      scaleControl?: boolean;
+      scaleControlOptions?: ScaleControlOptions;
     }
 
     interface Projection {
@@ -273,21 +273,21 @@ declare namespace qq {
     }
 
     interface MarkerOptions {
-      animation: MarkerAnimation;
-      clickable: boolean;
-      draggable: boolean;
-      flat: boolean;
-      cursor: string;
-      icon: MarkerImage;
-      shadow: MarkerImage;
-      shape: MarkerImage;
-      title: string;
-      visible: boolean;
-      zIndex: boolean;
-      map: Map;
-      position: LatLng;
-      rotation: number;
-      autoRotation: boolean;
+      animation?: MarkerAnimation;
+      clickable?: boolean;
+      draggable?: boolean;
+      flat?: boolean;
+      cursor?: string;
+      icon?: MarkerImage;
+      shadow?: MarkerImage;
+      shape?: MarkerImage;
+      title?: string;
+      visible?: boolean;
+      zIndex?: boolean;
+      map?: Map;
+      position?: LatLng;
+      rotation?: number;
+      autoRotation?: boolean;
     }
 
     class MarkerImage {
@@ -367,13 +367,13 @@ declare namespace qq {
     }
 
     interface MarkerClusterOptions {
-      map: Map;
-      minimumClusterSize: number;
-      markers: Marker; // Suppose to be Array<Marker>
-      zoomOnClick: boolean;
-      gridSize: number;
-      averageCenter: boolean;
-      maxZoom: number
+      map?: Map;
+      minimumClusterSize?: number;
+      markers?: Marker; // Suppose to be Array<Marker>
+      zoomOnClick?: boolean;
+      gridSize?: number;
+      averageCenter?: boolean;
+      maxZoom?: number
     }
 
     class MarkerCluster extends MVCObject {
@@ -381,10 +381,10 @@ declare namespace qq {
     }
 
     interface InfoWindowOptions {
-      map: Map;
-      content: HTMLElement | string;
-      position: LatLng | Marker;
-      zIndex: number;
+      map?: Map;
+      content?: HTMLElement | string;
+      position?: LatLng | Marker;
+      zIndex?: number;
     }
 
     class InfoWindow extends MVCObject {
@@ -414,16 +414,16 @@ declare namespace qq {
     }
 
     interface PolylineOptions {
-      clickable: boolean;
-      cursor: string;
-      editable: boolean;
-      map: Map;
-      path: Array<LatLng> | MVCArray<LatLng>;
-      strokeColor: Color | string;
-      strokeDashStyle: string;
-      strokeWeight: number;
-      visible: boolean;
-      zIndex: number;
+      clickable?: boolean;
+      cursor?: string;
+      editable?: boolean;
+      map?: Map;
+      path?: Array<LatLng> | MVCArray<LatLng>;
+      strokeColor?: Color | string;
+      strokeDashStyle?: string;
+      strokeWeight?: number;
+      visible?: boolean;
+      zIndex?: number;
     }
 
     class Polyline extends MVCObject {
@@ -459,17 +459,17 @@ declare namespace qq {
     }
 
     interface PolygonOptions {
-      clickable: boolean;
-      cursor: string;
-      editable: boolean;
-      fillColor: Color | string;
-      map: Map;
-      path: Array<LatLng> | MVCArray<LatLng>;
-      strokeColor: Color | string;
-      strokeDashStyle: string;
-      strokeWeight: number;
-      visible: boolean;
-      zIndex: number;
+      clickable?: boolean;
+      cursor?: string;
+      editable?: boolean;
+      fillColor?: Color | string;
+      map?: Map;
+      path?: Array<LatLng> | MVCArray<LatLng>;
+      strokeColor?: Color | string;
+      strokeDashStyle?: string;
+      strokeWeight?: number;
+      visible?: boolean;
+      zIndex?: number;
     }
 
     class Polygon extends MVCObject {
@@ -505,18 +505,18 @@ declare namespace qq {
     }
 
     interface CircleOptions {
-      center: LatLng;
-      clickable: boolean;
-      cursor: string;
-      editable: boolean;
-      fillColor: Color | string;
-      map: Map;
-      path: Array<LatLng> | MVCArray<LatLng>;
-      strokeColor: Color | string;
-      strokeDashStyle: string;
-      strokeWeight: number;
-      visible: boolean;
-      zIndex: number;
+      center?: LatLng;
+      clickable?: boolean;
+      cursor?: string;
+      editable?: boolean;
+      fillColor?: Color | string;
+      map?: Map;
+      path?: Array<LatLng> | MVCArray<LatLng>;
+      strokeColor?: Color | string;
+      strokeDashStyle?: string;
+      strokeWeight?: number;
+      visible?: boolean;
+      zIndex?: number;
     }
 
     class Circle extends MVCObject {
@@ -548,14 +548,14 @@ declare namespace qq {
     }
 
     interface LabelOptions {
-      clickable: boolean;
-      content: string;
-      map: Map;
-      offset: Size;
-      position: LatLng;
-      style: object;
-      visible: boolean;
-      zIndex: number;
+      clickable?: boolean;
+      content?: string;
+      map?: Map;
+      offset?: Size;
+      position?: LatLng;
+      style?: object;
+      visible?: boolean;
+      zIndex?: number;
     }
 
     class Label extends MVCObject {
@@ -587,14 +587,14 @@ declare namespace qq {
     }
 
     interface GroundOverlayOptions {
-      bounds: LatLngBounds;
-      clickable: boolean;
-      cursor: string;
-      imageUrl: string,
-      map: Map;
-      opacity: number;
-      visible: boolean;
-      zIndex: number;
+      bounds?: LatLngBounds;
+      clickable?: boolean;
+      cursor?: string;
+      imageUrl?: string,
+      map?: Map;
+      opacity?: number;
+      visible?: boolean;
+      zIndex?: number;
     }
 
     class GroundOverlay {
@@ -624,13 +624,13 @@ declare namespace qq {
     }
 
     interface MapPanes {
-      mapPane: HTMLDivElement;
-      overlayLayer: HTMLDivElement;
-      overlayShadow: HTMLDivElement;
-      overlayImage: HTMLDivElement;
-      floatShadow: HTMLDivElement;
-      overlayMouseTarget: HTMLDivElement;
-      floatPane: HTMLDivElement;
+      mapPane?: HTMLDivElement;
+      overlayLayer?: HTMLDivElement;
+      overlayShadow?: HTMLDivElement;
+      overlayImage?: HTMLDivElement;
+      floatShadow?: HTMLDivElement;
+      overlayMouseTarget?: HTMLDivElement;
+      floatPane?: HTMLDivElement;
     }
 
 
@@ -694,42 +694,43 @@ declare namespace qq {
     }
 
     interface PoiList {
-      pois: Array<Poi>;
-      pageIndex: number;
-      pageCapacity: number;
-      totalNum: number;
+      pois?: Array<Poi>;
+      pageIndex?: number;
+      pageCapacity?: number;
+      totalNum?: number;
     }
 
 
     interface Poi {
       id: string;
-      name: string;
-      latLng: LatLng;
-      type: PoiType;
-      address: string;
-      phone: string;
-      postcode: string;
-      category: string;
-      boundary: Array<LatLng>;
-      panoinfo: object;
-      dist: number;
+      name?: string;
+      latLng?: LatLng;
+      type?: PoiType;
+      address?: string;
+      phone?: string;
+      postcode?: string;
+      category?: string;
+      boundary?: Array<LatLng>;
+      panoinfo?: object;
+      dist?: number;
     }
 
     interface CityList {
-      cities: Array<City>;
+      cities?: Array<City>;
     }
 
     interface City {
-      cityName: string;
-      resultNum: number;
+      cityName?: string;
+      resultNum?: number;
       cities?: Array<City>;
     }
 
     interface AreaInfo {
-      name: string;
-      level: string;
-      latlng: LatLng;
+      name?: string;
+      level?: string;
+      latlng?: LatLng;
     }
+
 
     type SearchServiceCompleteFunction = (type: ServiceResultType, detail: PoiList | CityList | AreaInfo) => void;
     type SearchServiceErrorFunction = (error: ServiceErrorType) => void;

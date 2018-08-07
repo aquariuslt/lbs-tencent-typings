@@ -16,3 +16,6 @@ yarn.lock
 .editorconfig
 .coveralls.yml
 .travis.yml
+
+# Docs
+docs
